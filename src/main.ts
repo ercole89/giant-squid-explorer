@@ -108,6 +108,7 @@ async function saveEvent(ctx: ProcessorContext<StoreWithCache>, event: Event) {
     const entity = new model.Event({
         id: event.id,
         block,
+        blockNumber: block.height,
         args: event.args,
         call,
         extrinsic,

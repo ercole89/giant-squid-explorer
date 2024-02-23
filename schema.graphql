@@ -77,6 +77,7 @@ type Event @entity @index(fields: ["id", "pallet", "name"]) {
     call: Call
 
     index: Int!
+    blockNumber: Int! @index
     phase: String!
 
     pallet: String! @index

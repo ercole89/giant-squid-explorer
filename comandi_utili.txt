@@ -1,0 +1,28 @@
+1) forka la repository github sul proprio account githu
+2) apri vscode e premi su "clone repository"
+3) una volta clonata la repository su vscode, aprire a parte il CMD di windows
+4) eseguire il comando "cd C:\Users\utente\Documents\progettiVSCODE\giant-squid-explorer"
+5) installare subsquidcli "npm install -g @subsquid/cli"
+6) eseguire "npm ci"
+7) a questo punto modificare lo schema.graphql e salvare (blockNumber Int! @index da inserire nell'entita Event e nell'entità block)
+8) modificare il file main.ts e salvare (inserire qualcosa che non so)
+9) eseguire sul cmd di windows "sqd codegen" così ti si modificano vari file che servono per settare i nuovi campi nello schema graphql
+10) eseguire i seguenti comandi
+sqd codegen
+sqd build
+11) aprire docker desktop, poi eseguire i seguenti comandi
+sqd up
+sqd migration:generate
+12) se ho piu file generatai (vedi la cartella db/migrations in vscode, se ce ne sono piu di uno cancellali tutti con sqd migration:clean e rimanda il comando sqd migration:generate
+sqd migration:apply
+sqd run . -m manifests/astar.yaml
+
+PER AGGIONRARE IL DATABASE DOPO AVER MODIFICATO LO SCHEMA GRAPHQL E ALTRI FILE
+
+sqd down
+sqd codegen
+sqd build
+sqd up
+sqd migration:generate
+sqd migration:apply
+sqd run . -m manifests/astar.yaml

@@ -1,11 +1,12 @@
-module.exports = class Data1706203315683 {
-    name = 'Data1706203315683'
+module.exports = class Data1708681962446 {
+    name = 'Data1708681962446'
 
     async up(db) {
-        await db.query(`CREATE TABLE "event" ("id" character varying NOT NULL, "index" integer NOT NULL, "phase" text NOT NULL, "pallet" text NOT NULL, "name" text NOT NULL, "args" jsonb, "args_str" text array, "block_id" character varying, "extrinsic_id" character varying, "call_id" character varying, CONSTRAINT "PK_30c2f3bbaf6d34a55f8ae6e4614" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE TABLE "event" ("id" character varying NOT NULL, "index" integer NOT NULL, "block_number" integer NOT NULL, "phase" text NOT NULL, "pallet" text NOT NULL, "name" text NOT NULL, "args" jsonb, "args_str" text array, "block_id" character varying, "extrinsic_id" character varying, "call_id" character varying, CONSTRAINT "PK_30c2f3bbaf6d34a55f8ae6e4614" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_2b0d35d675c4f99751855c4502" ON "event" ("block_id") `)
         await db.query(`CREATE INDEX "IDX_129efedcb305c80256db2d57a5" ON "event" ("extrinsic_id") `)
         await db.query(`CREATE INDEX "IDX_83cf1bd59aa4521ed882fa5145" ON "event" ("call_id") `)
+        await db.query(`CREATE INDEX "IDX_a8a7fbbbb0d8305cd81eda6ac8" ON "event" ("block_number") `)
         await db.query(`CREATE INDEX "IDX_7723d04c5a2f56c4373b6a4048" ON "event" ("pallet") `)
         await db.query(`CREATE INDEX "IDX_b535fbe8ec6d832dde22065ebd" ON "event" ("name") `)
         await db.query(`CREATE INDEX "IDX_0a00d817e614a91cda40d734cf" ON "event" ("id", "pallet", "name") `)
@@ -47,6 +48,7 @@ module.exports = class Data1706203315683 {
         await db.query(`DROP INDEX "public"."IDX_2b0d35d675c4f99751855c4502"`)
         await db.query(`DROP INDEX "public"."IDX_129efedcb305c80256db2d57a5"`)
         await db.query(`DROP INDEX "public"."IDX_83cf1bd59aa4521ed882fa5145"`)
+        await db.query(`DROP INDEX "public"."IDX_a8a7fbbbb0d8305cd81eda6ac8"`)
         await db.query(`DROP INDEX "public"."IDX_7723d04c5a2f56c4373b6a4048"`)
         await db.query(`DROP INDEX "public"."IDX_b535fbe8ec6d832dde22065ebd"`)
         await db.query(`DROP INDEX "public"."IDX_0a00d817e614a91cda40d734cf"`)

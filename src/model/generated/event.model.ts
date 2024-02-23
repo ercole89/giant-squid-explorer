@@ -31,6 +31,10 @@ export class Event {
     @Column_("int4", {nullable: false})
     index!: number
 
+    @Index_()
+    @Column_("int4", {nullable: false})
+    blockNumber!: number
+
     @Column_("text", {nullable: false})
     phase!: string
 
