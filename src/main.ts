@@ -105,11 +105,53 @@ async function saveEvent(ctx: ProcessorContext<StoreWithCache>, event: Event) {
 
     const [pallet, name] = event.name.split('.')
 
+
+    // Aggiungi un controllo per assicurarti che event.args sia definito e non null
+    /*
+    let argsStr: string[] = [];
+    if (event.args && typeof event.args === 'object') {
+        argsStr = Object.values(event.args).map(value => JSON.stringify(value));
+    }
+    */
+    let argsStr: string[] = [];
+if (event.args) {
+    // Se `args` è un array, iteriamo attraverso di esso
+    if (Array.isArray(event.args)) {
+        argsStr = event.args.map(value => {
+            if (typeof value === 'string') {
+                // Per le stringhe, le restituiamo direttamente
+                return value;
+            } else if (typeof value === 'object' && value !== null) {
+                // Per gli oggetti, convertiamoli in stringa JSON e poi rimuoviamo le virgolette esterne
+                return JSON.stringify(value).replace(/^"|"$/g, '');
+            } else {
+                // Per tutti gli altri tipi, li convertiamo in stringa
+                return String(value);
+            }
+        });
+    } else if (typeof event.args === 'string') {
+        // Se `args` è una singola stringa, la aggiungiamo direttamente
+        argsStr.push(event.args);
+    } else if (typeof event.args === 'object' && event.args !== null) {
+        // Se `args` è un oggetto, per ogni proprietà aggiungiamo la sua rappresentazione stringa
+        Object.values(event.args).forEach(value => {
+            if (typeof value === 'object' && value !== null) {
+                // Convertiamo l'oggetto in stringa JSON senza virgolette esterne
+                argsStr.push(JSON.stringify(value).replace(/^"|"$/g, ''));
+            } else {
+                // Convertiamo il valore in stringa
+                argsStr.push(String(value));
+            }
+        });
+    }
+}
+
     const entity = new model.Event({
         id: event.id,
         block,
         blockNumber: block.height,
         args: event.args,
+        argsStr: argsStr, // Aggiungi argsStr qui
         call,
         extrinsic,
         index: event.index,
