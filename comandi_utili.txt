@@ -4,11 +4,6 @@
 4) eseguire il comando "cd C:\Users\utente\Documents\progettiVSCODE\giant-squid-explorer"
 5) installare subsquidcli "npm install -g @subsquid/cli"
 6) eseguire "npm ci"
-
-
-git config --global user.name ercole89
-git config --global user.email davide.ercole89@gmail.com
-
 6bis) npx npm-check-updates -u per aggioranre i vari pacchetti
 7) a questo punto modificare lo schema.graphql e salvare (blockNumber Int! @index da inserire nell'entita Event e nell'entità block)
 8) modificare il file main.ts e salvare (inserire qualcosa che non so)
